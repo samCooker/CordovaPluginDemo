@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CordovaPluginDemo</string>
+    <string name="file_picker_name">FilePickerDemo</string>
+    <string name="file_picker_inst">this is a file picker demo</string>
+    <string name="show_dialog">Show Dialog</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="choose_button_label">Select</string>
+    <string name="bar_scanner">BarScanner</string>
+</resources>
