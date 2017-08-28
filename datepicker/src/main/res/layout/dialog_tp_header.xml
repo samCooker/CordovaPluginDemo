@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/tpHeaderBg"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="?android:listPreferredItemHeight">
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/tv_tle_year"
+              android:padding="@dimen/header_title_padding"
+              android:textSize="@dimen/header_title"
+              android:layout_alignBaseline="@+id/tv_tle_month" android:layout_alignBottom="@+id/tv_tle_month" android:layout_alignParentStart="true"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/tv_tle_month"
+              android:padding="@dimen/header_title_padding"
+              android:textSize="@dimen/header_title"
+              android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

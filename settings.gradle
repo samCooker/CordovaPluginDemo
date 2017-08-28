@@ -1,1 +1,1 @@
-include ':app', ':filepicker', ':barcodescanner'
+include ':app', ':filepicker', ':barcodescanner', ':datepicker'

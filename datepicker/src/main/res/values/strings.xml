@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DatePicker</string>
+
+    <string name="cancel_button_label">cancel</string>
+    <string name="choose_button_label">OK</string>
+
+</resources>
