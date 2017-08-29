@@ -35,7 +35,6 @@ public class TimeScrollPicker extends ScrollPickerView<CharSequence> {
 
     private int mMaxLineWidth = -1; // 最大的行宽,默认为itemWidth.超过后文字自动换行
     private Layout.Alignment mAlignment = Layout.Alignment.ALIGN_CENTER; // 对齐方式,默认居中
-    private String dataType="1";//1 小时  2 分钟
 
 
     public TimeScrollPicker(Context context, AttributeSet attrs) {

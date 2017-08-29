@@ -27,6 +27,9 @@
             <enum name="left" value="2"/>
             <enum name="right" value="3"/>
         </attr>
-        <attr name="spv_data_type" format="string"/>
+        <!--<attr name="spv_data_type" format="string">-->
+            <!--<enum name="hour" value="1"/>-->
+            <!--<enum name="minute" value="2"/>-->
+        <!--</attr>-->
     </declare-styleable>
 </resources>
