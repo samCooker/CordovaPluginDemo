@@ -32,24 +32,26 @@ public class TimePickerDialog extends Dialog {
 
         mLManager = DPLManager.getInstance();
 
-//        monthView = findViewById(R.id.v_main_month);
-        tvYear = findViewById(R.id.tv_tle_year);
-        tvMonth = findViewById(R.id.tv_tle_month);
+        monthView = (MonthView) findViewById(R.id.v_main_month);
+        tvYear = (TextView) findViewById(R.id.tv_tle_year);
+        tvMonth = (TextView) findViewById(R.id.tv_tle_month);
 
-//        monthView.setOnDateChangeListener(new MonthView.OnDateChangeListener() {
-//            @Override
-//            public void onMonthChange(int month) {
-//                tvMonth.setText(mLManager.titleMonth()[month - 1]);
-//            }
-//
-//            @Override
-//            public void onYearChange(int year) {
-//                String tmp = String.valueOf(year);
-//                if (tmp.startsWith("-")) {
-//                    tmp = tmp.replace("-", mLManager.titleBC());
-//                }
-//                tvYear.setText(tmp);
-//            }
-//        });
+        tvYear.setText(monthView.getCenterYear());
+        tvMonth.setText(monthView.getCenterMonth());
+        monthView.setOnDateChangeListener(new MonthView.OnDateChangeListener() {
+            @Override
+            public void onMonthChange(int month) {
+                tvMonth.setText(mLManager.titleMonth()[month - 1]);
+            }
+
+            @Override
+            public void onYearChange(int year) {
+                String tmp = String.valueOf(year);
+                if (tmp.startsWith("-")) {
+                    tmp = tmp.replace("-", mLManager.titleBC());
+                }
+                tvYear.setText(tmp);
+            }
+        });
     }
 }

@@ -37,8 +37,8 @@ public class DatePicker extends LinearLayout {
     private TextView tvEnsure;// 确定按钮显示
 
     //时分钟选择
-    private StringScrollPicker hourPicker;
-    private StringScrollPicker minuPicker;
+    private TimeScrollPicker hourPicker;
+    private TimeScrollPicker minuPicker;
 
 
     private OnDateSelectedListener onDateSelectedListener;// 日期多选后监听
@@ -171,7 +171,7 @@ public class DatePicker extends LinearLayout {
         LayoutParams lpTime = new LayoutParams(MATCH_PARENT, MATCH_PARENT);
         lpTime.height=250;
         lpTime.weight=1;
-        hourPicker = new StringScrollPicker(context,null);
+        hourPicker = new TimeScrollPicker(context,null);
         hourPicker.setData(new ArrayList<CharSequence>(Arrays.asList(DataUtils.hoursArray(false))));
         hourPicker.setTextSize(40,45);
 
@@ -185,7 +185,7 @@ public class DatePicker extends LinearLayout {
         tvTimeSep.setGravity(Gravity.CENTER_VERTICAL);
         tvTimeSep.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
 
-        minuPicker = new StringScrollPicker(context,null);
+        minuPicker = new TimeScrollPicker(context,null);
         minuPicker.setData(new ArrayList<CharSequence>(Arrays.asList(DataUtils.minutesArray())));
         minuPicker.setTextSize(40,45);
 

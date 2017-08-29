@@ -21,6 +21,8 @@ package com.cookie.filepicker.model;
  * </p>
  */
 
+import android.graphics.Bitmap;
+
 /**
  * The model/container class holding file list data.
  */
@@ -28,6 +30,7 @@ public class FileListItem implements Comparable<FileListItem>
 {   private String filename,location;
     private boolean directory,marked;
     private long time;
+    private Bitmap bitmap;
 
     public String getFilename() {
         return filename;
@@ -89,5 +92,13 @@ public class FileListItem implements Comparable<FileListItem>
         {   //Same as above but order of occurence is different.
             return -1;
         }
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }

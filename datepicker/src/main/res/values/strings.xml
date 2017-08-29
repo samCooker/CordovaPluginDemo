@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">DatePicker</string>
 
-    <string name="cancel_button_label">cancel</string>
-    <string name="choose_button_label">OK</string>
+    <string name="dp_cancel_button_label">cancel</string>
+    <string name="dp_choose_button_label">OK</string>
+
+    <string name="dp_tv_hour">hour</string>
+    <string name="dp_tv_minus">minutes</string>
 
 </resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dp_cancel_button_label">取消</string>
+    <string name="dp_choose_button_label">确定</string>
+
+    <string name="dp_tv_hour">小时</string>
+    <string name="dp_tv_minus">分钟</string>
+</resources>

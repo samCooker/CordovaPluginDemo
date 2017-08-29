@@ -5,4 +5,7 @@
     <!--标题背景色-->
     <color name="tpHeaderBg">#11c1f3</color>
     <color name="tpHeaderOk">#ffffff</color>
+
+    <!---->
+    <color name="tpTextColor">#ffffff</color>
 </resources>

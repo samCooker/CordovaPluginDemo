@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#11c1f3</color>
-    <color name="colorPrimaryDark">#11c1f3</color>
-    <color name="colorAccent">#11c1f3</color>
-    <color name="textColorPrimary">#FFFFFF</color>
-    <color name="textColorSecondary">#FFFFFF</color>
-    <color name="colorHeader">@color/colorPrimary</color>
+    <color name="fp_colorPrimary">#11c1f3</color>
+    <color name="fp_colorPrimaryDark">#11c1f3</color>
+    <color name="fp_colorAccent">#11c1f3</color>
+    <color name="fp_textColorPrimary">#FFFFFF</color>
+    <color name="fp_textColorSecondary">#FFFFFF</color>
+    <color name="fp_colorHeader">@color/fp_colorPrimary</color>
 </resources>

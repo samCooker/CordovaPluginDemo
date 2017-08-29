@@ -17,10 +17,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 字符串滚动选择器
+ * 小时分钟滚动选择器
  * Created by huangziwei on 16-12-6.
  */
-public class StringScrollPicker extends ScrollPickerView<CharSequence> {
+public class TimeScrollPicker extends ScrollPickerView<CharSequence> {
 
 
     private int mMeasureWidth;
@@ -35,14 +35,14 @@ public class StringScrollPicker extends ScrollPickerView<CharSequence> {
 
     private int mMaxLineWidth = -1; // 最大的行宽,默认为itemWidth.超过后文字自动换行
     private Layout.Alignment mAlignment = Layout.Alignment.ALIGN_CENTER; // 对齐方式,默认居中
+    private String dataType="1";//1 小时  2 分钟
 
 
-    public StringScrollPicker(Context context, AttributeSet attrs) {
+    public TimeScrollPicker(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public StringScrollPicker(Context context, AttributeSet attrs,
-                              int defStyleAttr) {
+    public TimeScrollPicker(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         mPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
@@ -51,7 +51,7 @@ public class StringScrollPicker extends ScrollPickerView<CharSequence> {
         init(attrs);
 
         setData(new ArrayList<CharSequence>(Arrays.asList(new String[]{
-                "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
         })));
 
     }
@@ -60,17 +60,17 @@ public class StringScrollPicker extends ScrollPickerView<CharSequence> {
     private void init(AttributeSet attrs) {
         if (attrs != null) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs,
-                    R.styleable.StringScrollPicker);
+                    R.styleable.TimeScrollPicker);
             mMinTextSize = typedArray.getDimensionPixelSize(
-                    R.styleable.StringScrollPicker_spv_min_text_size, mMinTextSize);
+                    R.styleable.TimeScrollPicker_spv_min_text_size, mMinTextSize);
             mMaxTextSize = typedArray.getDimensionPixelSize(
-                    R.styleable.StringScrollPicker_spv_max_text_size, mMaxTextSize);
+                    R.styleable.TimeScrollPicker_spv_max_text_size, mMaxTextSize);
             mStartColor = typedArray.getColor(
-                    R.styleable.StringScrollPicker_spv_start_color, mStartColor);
+                    R.styleable.TimeScrollPicker_spv_start_color, mStartColor);
             mEndColor = typedArray.getColor(
-                    R.styleable.StringScrollPicker_spv_end_color, mEndColor);
-            mMaxLineWidth = typedArray.getDimensionPixelSize(R.styleable.StringScrollPicker_spv_max_line_width, mMaxLineWidth);
-            int align = typedArray.getInt(R.styleable.StringScrollPicker_spv_alignment, 1);
+                    R.styleable.TimeScrollPicker_spv_end_color, mEndColor);
+            mMaxLineWidth = typedArray.getDimensionPixelSize(R.styleable.TimeScrollPicker_spv_max_line_width, mMaxLineWidth);
+            int align = typedArray.getInt(R.styleable.TimeScrollPicker_spv_alignment, 1);
             if (align == 2) {
                 mAlignment = Layout.Alignment.ALIGN_NORMAL;
             } else if (align == 3) {
@@ -230,4 +230,5 @@ public class StringScrollPicker extends ScrollPickerView<CharSequence> {
 
         mPaint.setColor(color);
     }
+
 }

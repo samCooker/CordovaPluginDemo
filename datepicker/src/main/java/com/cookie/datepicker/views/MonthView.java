@@ -104,8 +104,16 @@ public class MonthView extends View {
         mScroller = new Scroller(context);
         mPaint.setTextAlign(Paint.Align.CENTER);
         Calendar calendar = Calendar.getInstance();
-        topYear = calendar.get(Calendar.YEAR);
-        topMonth = calendar.get(Calendar.MONTH);
+        centerYear = calendar.get(Calendar.YEAR);
+        centerMonth = calendar.get(Calendar.MONTH)+1;
+
+        leftYear = topYear = centerYear-1;
+        leftMonth = topMonth = centerMonth;
+
+        rightYear = bottomYear = centerYear+1;
+        rightMonth = bottomMonth = centerMonth+2;
+
+
     }
 
     public MonthView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -818,5 +826,21 @@ public class MonthView extends View {
         public void onAnimationUpdate(ValueAnimator animation) {
             MonthView.this.invalidate();
         }
+    }
+
+    public int getCenterYear() {
+        return centerYear;
+    }
+
+    public void setCenterYear(int centerYear) {
+        this.centerYear = centerYear;
+    }
+
+    public int getCenterMonth() {
+        return centerMonth;
+    }
+
+    public void setCenterMonth(int centerMonth) {
+        this.centerMonth = centerMonth;
     }
 }

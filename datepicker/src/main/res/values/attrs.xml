@@ -16,7 +16,7 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="StringScrollPicker">
+    <declare-styleable name="TimeScrollPicker">
         <attr name="spv_min_text_size" format="dimension"/>
         <attr name="spv_max_text_size" format="dimension"/>
         <attr name="spv_start_color" format="color"/>
@@ -27,5 +27,6 @@
             <enum name="left" value="2"/>
             <enum name="right" value="3"/>
         </attr>
+        <attr name="spv_data_type" format="string"/>
     </declare-styleable>
 </resources>
