@@ -10,11 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 import com.cookie.datepicker.TimePickerDialog;
+import com.cookie.datepicker.TimePickerDialogListener;
 import com.cookie.datepicker.cons.DPMode;
 import com.cookie.datepicker.views.DatePicker;
 import com.cookie.filepicker.model.DialogProperties;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,32 +49,16 @@ public class MainActivity extends AppCompatActivity {
         datePickerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final DialogProperties properties=new DialogProperties();
                 TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this);
+                timePickerDialog.setTimePickerFlag(true);
+                timePickerDialog.setDialogListener(new TimePickerDialogListener() {
+                    @Override
+                    public void onSelectTimeDataBack(Date date) {
+                        SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        Toast.makeText(MainActivity.this,dft.format(date),Toast.LENGTH_SHORT).show();
+                    }
+                });
                 timePickerDialog.show();
-//                final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this).create();
-//                dialog.show();
-//                DatePicker picker = new DatePicker(MainActivity.this);
-//                Calendar calendar = Calendar.getInstance();
-//                picker.setDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1);
-//                picker.setMode(DPMode.MULTIPLE);
-//                picker.setOnDateSelectedListener(new DatePicker.OnDateSelectedListener() {
-//                    @Override
-//                    public void onDateSelected(List<String> date) {
-//                        String result = "";
-//                        Iterator iterator = date.iterator();
-//                        while (iterator.hasNext()) {
-//                            result += iterator.next();
-//                            if (iterator.hasNext()) {
-//                                result += "\n";
-//                            }
-//                        }
-//                        Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//                dialog.getWindow().setContentView(picker, params);
-//                dialog.getWindow().setGravity(Gravity.CENTER);
             }
         });
     }

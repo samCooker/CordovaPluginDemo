@@ -1,5 +1,8 @@
 package com.cookie.datepicker.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 /**
  * 数组操作工具类
  * 
@@ -9,9 +12,7 @@ package com.cookie.datepicker.utils;
  */
 public final class DataUtils {
 
-    public static final String[] ARR_1_5={"1","2","3","4","5"};
-    public static final String[] ARR_0_9={"0","1","2","3","4","5","6","7","8","9"};
-
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
     /**
      * 一维数组转换为二维数组
      *

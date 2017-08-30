@@ -103,17 +103,6 @@ public class MonthView extends View {
         }
         mScroller = new Scroller(context);
         mPaint.setTextAlign(Paint.Align.CENTER);
-        Calendar calendar = Calendar.getInstance();
-        centerYear = calendar.get(Calendar.YEAR);
-        centerMonth = calendar.get(Calendar.MONTH)+1;
-
-        leftYear = topYear = centerYear-1;
-        leftMonth = topMonth = centerMonth;
-
-        rightYear = bottomYear = centerYear+1;
-        rightMonth = bottomMonth = centerMonth+2;
-
-
     }
 
     public MonthView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -488,7 +477,7 @@ public class MonthView extends View {
         }
     }
 
-    List<String> getDateSelected() {
+    public List<String> getDateSelected() {
         return dateSelected;
     }
 
@@ -500,19 +489,19 @@ public class MonthView extends View {
         this.onDatePickedListener = onDatePickedListener;
     }
 
-    void setDPMode(DPMode mode) {
+    public void setDPMode(DPMode mode) {
         this.mDPMode = mode;
     }
 
-    void setDPDecor(DPDecor decor) {
+    public void setDPDecor(DPDecor decor) {
         this.mDPDecor = decor;
     }
 
-    DPMode getDPMode() {
+    public DPMode getDPMode() {
         return mDPMode;
     }
 
-    void setDate(int year, int month) {
+    public void setDate(int year, int month) {
         centerYear = year;
         centerMonth = month;
         indexYear = 0;
@@ -523,19 +512,31 @@ public class MonthView extends View {
         invalidate();
     }
 
-    void setFestivalDisplay(boolean isFestivalDisplay) {
+    public void initDate(Calendar calendar){
+        if(calendar==null){
+            calendar = Calendar.getInstance();
+        }
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH)+1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH)+1;
+        dateSelected.clear();
+        dateSelected.add(year+"-"+month+"-"+day);
+        setDate(year,month);
+    }
+
+    public void setFestivalDisplay(boolean isFestivalDisplay) {
         this.isFestivalDisplay = isFestivalDisplay;
     }
 
-    void setTodayDisplay(boolean isTodayDisplay) {
+    public void setTodayDisplay(boolean isTodayDisplay) {
         this.isTodayDisplay = isTodayDisplay;
     }
 
-    void setHolidayDisplay(boolean isHolidayDisplay) {
+    public void setHolidayDisplay(boolean isHolidayDisplay) {
         this.isHolidayDisplay = isHolidayDisplay;
     }
 
-    void setDeferredDisplay(boolean isDeferredDisplay) {
+    public void setDeferredDisplay(boolean isDeferredDisplay) {
         this.isDeferredDisplay = isDeferredDisplay;
     }
 
@@ -648,11 +649,10 @@ public class MonthView extends View {
                             animSet.start();
                         }
                         cirApr.put(date, circle);
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                            invalidate();
-                            if (null != onDatePickedListener) {
-                                onDatePickedListener.onDatePicked(date);
-                            }
+                        if (dateSelected.contains(date)) {
+                            dateSelected.remove(date);
+                        } else {
+                            dateSelected.add(date);
                         }
                     } else if (mDPMode == DPMode.MULTIPLE) {
                         if (regions.contains(region)) {

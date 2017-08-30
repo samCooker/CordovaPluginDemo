@@ -12,7 +12,5 @@
             android:id="@+id/v_main_month"
     />
 
-    <include layout="@layout/dialog_tp_time_picker" />
-
     <include layout="@layout/dialog_tp_footer"/>
 </LinearLayout>

@@ -12,13 +12,12 @@
     <Button
         style="?android:attr/buttonStyle"
         android:text="@string/dp_cancel_button_label"
-        android:id="@+id/cancel"
+        android:id="@+id/tp_cancel"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/tpHeaderOk"
-        android:textSize="@dimen/header_ok"
-        android:background="@color/tpHeaderBg"
+        android:background="@null"
         android:layout_margin="8dp"
         android:layout_weight="1"
         android:padding="4dp"/>
@@ -27,13 +26,12 @@
         style="?android:attr/buttonStyle"
         android:text="@string/dp_choose_button_label"
         android:textStyle="bold"
-        android:id="@+id/select"
+        android:id="@+id/tp_select"
         android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/tpHeaderOk"
-        android:textSize="@dimen/header_ok"
-        android:background="@color/tpHeaderBg"
+        android:background="@null"
         android:layout_margin="8dp"
         android:padding="4dp"/>
 </LinearLayout>

@@ -49,10 +49,6 @@ public class TimeScrollPicker extends ScrollPickerView<CharSequence> {
         mPaint.setColor(Color.BLACK);
         init(attrs);
 
-        setData(new ArrayList<CharSequence>(Arrays.asList(new String[]{
-                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
-        })));
-
     }
 
 

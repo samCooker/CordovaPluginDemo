@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="tpFooterBtn">#11c1f3</color>
+    <color name="tpFooterBtn">#ffffff</color>
 
     <!--标题背景色-->
     <color name="tpHeaderBg">#11c1f3</color>
-    <color name="tpHeaderOk">#ffffff</color>
+    <color name="tpHeaderOk">#11c1f3</color>
 
     <!---->
-    <color name="tpTextColor">#ffffff</color>
+    <color name="tpTextColor">#11c1f3</color>
 </resources>
