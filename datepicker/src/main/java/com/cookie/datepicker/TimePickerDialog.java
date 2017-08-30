@@ -8,6 +8,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.cookie.datepicker.bizs.languages.DPLManager;
 import com.cookie.datepicker.cons.DPMode;
 import com.cookie.datepicker.utils.DataUtils;
@@ -36,9 +38,11 @@ public class TimePickerDialog extends Dialog {
     private TimeScrollPicker viewMinu;
     private TimeScrollPicker viewHour;
     private boolean timePickerFlag=true;
+    private Context context;
 
     public TimePickerDialog(Context context) {
         super(context);
+        this.context=context;
     }
 
     @Override
@@ -71,7 +75,7 @@ public class TimePickerDialog extends Dialog {
         tvMonth = (TextView) findViewById(R.id.tv_tle_month);
 
         tvYear.setText(monthView.getCenterYear()+"");
-        tvMonth.setText(mLManager.titleMonth()[monthView.getCenterMonth()]);
+        tvMonth.setText(mLManager.titleMonth()[monthView.getCenterMonth()-1]);
         monthView.setOnDateChangeListener(new MonthView.OnDateChangeListener() {
             @Override
             public void onMonthChange(int month) {
@@ -114,6 +118,9 @@ public class TimePickerDialog extends Dialog {
                         dialogListener.onSelectTimeDataBack(date);
                         dismiss();
                     }
+                }else{
+                    String tip = context.getResources().getString(R.string.dp_select_none);
+                    Toast.makeText(context,tip,Toast.LENGTH_SHORT).show();
                 }
             }
         });

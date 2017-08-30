@@ -518,9 +518,6 @@ public class MonthView extends View {
         }
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH)+1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH)+1;
-        dateSelected.clear();
-        dateSelected.add(year+"-"+month+"-"+day);
         setDate(year,month);
     }
 

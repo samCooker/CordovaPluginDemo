@@ -26,13 +26,13 @@ public class DPCNCalendar extends DPCalendar {
     private static final String[][] FESTIVAL_G = {
             {"元旦"},
             {"情人节"},
-            {"国际妇女节","消费者权益日"},
-            { "清明节"},
-            {"国际劳动节", "中国青年节"},
-            {"国际儿童节"},
+            {"妇女节","消费者权益日"},
+            {"清明节"},
+            {"劳动节", "青年节"},
+            {"儿童节"},
             {"建党节"},
             {"建军节"},
-            {"抗战胜利日", "中国教师节"},
+            {"教师节"},
             {"国庆节"},
             {},
             {}};
@@ -46,7 +46,7 @@ public class DPCNCalendar extends DPCalendar {
             {1},
             {1},
             {1},
-            {3, 10},
+            {10},
             {1},
             {},
             {}};
@@ -71,7 +71,7 @@ public class DPCNCalendar extends DPCalendar {
             {},
             {5},
             {},
-            {7},
+            {},
             {15},
             {9},
             {},
@@ -110,9 +110,10 @@ public class DPCNCalendar extends DPCalendar {
     @Override
     public Set<String> buildMonthHoliday(int year, int month) {
         Set<String> tmp = new HashSet<>();
-        if (year == 2015) {
-            Collections.addAll(tmp, HOLIDAY[month - 1]);
-        }
+//        设置节日
+//        if (year == 2015) {
+//            Collections.addAll(tmp, HOLIDAY[month - 1]);
+//        }
         return tmp;
     }
 

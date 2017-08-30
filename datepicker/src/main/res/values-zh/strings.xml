@@ -5,4 +5,6 @@
 
     <string name="dp_tv_hour">小时</string>
     <string name="dp_tv_minus">分钟</string>
+
+    <string name="dp_select_none">请选择一个日期</string>
 </resources>
