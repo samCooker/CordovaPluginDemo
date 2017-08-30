@@ -646,11 +646,8 @@ public class MonthView extends View {
                             animSet.start();
                         }
                         cirApr.put(date, circle);
-                        if (dateSelected.contains(date)) {
-                            dateSelected.remove(date);
-                        } else {
-                            dateSelected.add(date);
-                        }
+                        dateSelected.clear();
+                        dateSelected.add(date);
                     } else if (mDPMode == DPMode.MULTIPLE) {
                         if (regions.contains(region)) {
                             regions.remove(region);
