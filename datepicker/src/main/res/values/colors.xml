@@ -9,4 +9,5 @@
 
     <!---->
     <color name="tpTextColor">#11c1f3</color>
+    <color name="tpContentColor">#ffffff</color>
 </resources>

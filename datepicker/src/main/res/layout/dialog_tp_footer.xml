@@ -17,8 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/tpHeaderOk"
-        android:background="@null"
-        android:layout_margin="8dp"
+        android:background="@color/tpContentColor"
         android:layout_weight="1"
         android:padding="4dp"/>
 
@@ -31,7 +30,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/tpHeaderOk"
-        android:background="@null"
-        android:layout_margin="8dp"
+        android:background="@color/tpContentColor"
         android:padding="4dp"/>
 </LinearLayout>

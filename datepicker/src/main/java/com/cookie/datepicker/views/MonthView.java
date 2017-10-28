@@ -512,12 +512,16 @@ public class MonthView extends View {
         invalidate();
     }
 
-    public void initDate(Calendar calendar){
-        if(calendar==null){
-            calendar = Calendar.getInstance();
+    public void initDate(Date date){
+        Calendar calendar= Calendar.getInstance();
+        if(date!=null){
+            calendar.setTime(date);
         }
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH)+1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        //默认选择当前日期
+        this.dateSelected.add(year+"-"+month+"-"+day);
         setDate(year,month);
     }
 

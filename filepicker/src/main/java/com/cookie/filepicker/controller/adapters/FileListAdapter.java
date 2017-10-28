@@ -18,6 +18,8 @@ package com.cookie.filepicker.controller.adapters;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import static android.net.wifi.SupplicantState.COMPLETED;
 
 /**
  * <p>

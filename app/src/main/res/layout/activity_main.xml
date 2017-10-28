@@ -3,7 +3,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:rowCount="2"
+            android:rowCount="3"
             android:columnCount="2"
                 >
 
@@ -23,6 +23,13 @@
 
     <Button
             android:id="@+id/btn_datepicker"
+            android:background="#1E88E5"
+            android:text="@string/date_picker_name"
+            android:layout_columnWeight="1"
+    />
+
+    <Button
+            android:id="@+id/btn_alipay"
             android:background="#1E88E5"
             android:text="@string/date_picker_name"
             android:layout_columnWeight="1"

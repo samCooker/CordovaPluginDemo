@@ -21,7 +21,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/tpTextColor"
-                android:background="@null"
+                android:background="@color/tpContentColor"
                 android:text="@string/dp_tv_hour"
         />
         <TextView
@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/tpTextColor"
-                android:background="@null"
+                android:background="@color/tpContentColor"
                 android:text="@string/dp_tv_minus"
                 android:id="@+id/textView"/>
     </LinearLayout>
@@ -44,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
                 android:layout_weight="1"
+                android:background="@color/tpContentColor"
                 app:spv_center_item_background="#44000000"
                 app:spv_disallow_intercept_touch="true"
                 app:spv_max_text_size="16dp"
@@ -55,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
                 android:layout_weight="1"
+                android:background="@color/tpContentColor"
                 app:spv_center_item_background="#44000000"
                 app:spv_disallow_intercept_touch="true"
                 app:spv_max_text_size="16dp"
