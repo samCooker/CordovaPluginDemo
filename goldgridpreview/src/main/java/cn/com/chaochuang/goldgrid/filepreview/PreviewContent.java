@@ -18,6 +18,8 @@ import android.widget.*;
 import cn.com.chaochuang.goldgrid.filepreview.utill.AnnotationToJsonUtil;
 import cn.com.chaochuang.goldgrid.filepreview.utill.HttpServer;
 import cn.com.chaochuang.goldgrid.filepreview.utill.MyConstant;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.kinggrid.iapppdf.emdev.ui.gl.GLConfiguration;
 import com.kinggrid.iapppdf.emdev.utils.LayoutUtils;
 import com.kinggrid.iapppdf.ui.viewer.IActivityController;
@@ -35,6 +37,16 @@ import java.util.ArrayList;
 public class PreviewContent extends IAppPDFActivity implements MyConstant {
 
     private Button backButton;
+    private FloatingActionsMenu actionsMenu;
+    private FloatingActionsMenu handleWriteMenu;
+    private FloatingActionButton handWrite;
+    private FloatingActionButton textInput;
+    private FloatingActionButton btnSaveNote;
+
+    /**
+     * 全文批注按钮
+     */
+    public FloatingActionButton btnClose, btnClear, btnUndo, btnRedo, btnSave, btnPen, btnEarse, btnSend;
 
     private FrameLayout frameLayout;
     private boolean hasLoaded = false;
@@ -70,8 +82,8 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
         context = this;
         setContentView(R.layout.activity_preview_content);
         frameLayout = (FrameLayout) findViewById(R.id.book_frame);
-        backButton = findViewById(R.id.btn_back);
-        this.backButtonEvent();
+//        backButton = findViewById(R.id.btn_back);
+//        this.backButtonEvent();
 
         this.initPDFParams();
         super.initPDFView(frameLayout);
@@ -217,7 +229,6 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
                 finish();
             }
         });
-
     }
 
     private void initParentListener() {
@@ -458,33 +469,43 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
 //        }
     }
 
-    private HorizontalScrollView toolScrollView;
     private void initToolBar() {
-        Button toolMenu = findViewById(R.id.btn_tool_menu);
-        toolScrollView = findViewById(R.id.tool_item_layout);
-        toolMenu.setOnClickListener(new View.OnClickListener() {
+        handWrite = findViewById(R.id.ac_hand_write);
+        textInput = findViewById(R.id.ac_txt_input);
+        actionsMenu = findViewById(R.id.action_menu);
+
+        //手写页面
+        handwriteView_layout = View.inflate(context,
+                R.layout.signature_kinggrid_full, null);
+        full_handWriteView = handwriteView_layout
+                .findViewById(R.id.v_canvas1);
+        handleWriteMenu = handwriteView_layout.findViewById(R.id.hand_write_menu);
+        isSendPageFn = false;
+        this.initBtnView(handwriteView_layout);
+
+
+        handWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolScrollView.setVisibility(View.VISIBLE);
+                actionsMenu.collapse();
+
+                Message msg = new Message();
+                msg.what = 100;
+                myHandler2.sendMessage(msg);
+
+                handleWriteMenu.expand();
             }
         });
 
-        handleWriteBtn = findViewById(R.id.btn_handle_write);
-        handleWriteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sxpzFromJs("admin");
-            }
-        });
+//        handleWriteBtn = findViewById(R.id.btn_handle_write);
+//        handleWriteBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sxpzFromJs("admin");
+//            }
+//        });
     }
 
-    // 手写批注
-    private Button handleWriteBtn;
-    public void sxpzFromJs(String name) {
-        Message msg = new Message();
-        msg.obj = name;
-        sxpzFromJHandler.sendMessage(msg);
-    }
 
     // 判断是否已经打开手写批注
     public boolean isOpenWrite = false;
@@ -492,33 +513,7 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
     private PDFHandWriteView full_handWriteView;
     // 是否进行分页;(true 表示分页，false表示不分页)
     public boolean isSendPageFn = true;
-    @SuppressLint("HandlerLeak")
-    Handler sxpzFromJHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg1) {
 
-            try {
-                if (isOpenWrite) {
-                    Toast.makeText(context, "手写批注窗体已经打开！", Toast.LENGTH_SHORT)
-                            .show();
-                    return;
-                }
-                handwriteView_layout = View.inflate(context,
-                        R.layout.signature_kinggrid_full, null);
-                full_handWriteView = (PDFHandWriteView) handwriteView_layout
-                        .findViewById(R.id.v_canvas1);
-                isSendPageFn = false;
-                initBtnView(handwriteView_layout);
-                // 取消等待交互
-                Message msg = new Message();
-                msg.what = 100;
-                myHandler2.sendMessage(msg);
-            } catch (Exception e) {
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        }
-    };
     @SuppressLint("HandlerLeak")
     Handler myHandler2 = new Handler() {
         @Override
@@ -528,17 +523,14 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
     };
 
 
-    /**
-     * 全文批注按钮
-     */
-    public Button btnClose, btnClear, btnUndo, btnRedo, btnSave, btnPen, btnEarse, btnSend;
+
     // 判断是否是保存或者发送(发送 0,保存1)
     public int isSaveOrSend = 0;
     /*
     * 初始化全文批注界面中的按钮，并设置按钮点击事件的监听接口
     */
     private void initBtnView(final View layout) {
-        btnClose = (Button) layout.findViewById(R.id.btn_close);
+        btnClose = layout.findViewById(R.id.btn_close);
         //关闭
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -548,7 +540,7 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             }
         });
         //保存
-        btnSave = (Button) layout.findViewById(R.id.btn_save);
+        btnSave = layout.findViewById(R.id.btn_save);
         btnSave.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -583,7 +575,7 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             }
         });
 
-        btnUndo = (Button) layout.findViewById(R.id.btn_undo);
+        btnUndo = layout.findViewById(R.id.btn_undo);
         btnUndo.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -592,7 +584,7 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             }
         });
 
-        btnRedo = (Button) layout.findViewById(R.id.btn_redo);
+        btnRedo = layout.findViewById(R.id.btn_redo);
         btnRedo.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -601,7 +593,7 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             }
         });
 
-        btnClear = (Button) layout.findViewById(R.id.btn_clear);
+        btnClear =  layout.findViewById(R.id.btn_clear);
         btnClear.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -610,7 +602,7 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             }
         });
 
-        btnPen = (Button) layout.findViewById(R.id.btn_pen);
+        btnPen = layout.findViewById(R.id.btn_pen);
         btnPen.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -620,8 +612,9 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             }
         });
         //发送
-        btnSend = (Button) layout.findViewById(R.id.btn_send);
+//        btnSend = layout.findViewById(R.id.btn_send);
 
+        //按钮添加到工具栏
     }
 
     // 关闭手写签批

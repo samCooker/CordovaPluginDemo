@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //内置sd卡路径
 //                String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-                String sdcardPath = "/storage/emulated/0/supercreate/meeting/admin/Spring Data JPA中文文档[1.4.3].pdf";
+                String sdcardPath = "/storage/emulated/0/$MuMu共享文件夹/Spring Data JPA中文文档[1.4.3].pdf";
                 File file = new File(sdcardPath);
                 Uri uri = Uri.fromFile(file);
                 Intent intent = new Intent("android.intent.action.VIEW", uri);

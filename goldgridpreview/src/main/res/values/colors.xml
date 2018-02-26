@@ -26,6 +26,8 @@
     <!--自定义dialog-->
     <color name="blue">#63aade</color>
     <color name="white">#ffffff</color>
+    <color name="btn_white">#fafafa</color>
+    <color name="btn_press_white">#f1f1f1</color>
 
     <color name="outline">#BB89009F</color>
     <color name="customcolor">#ffffff</color>
