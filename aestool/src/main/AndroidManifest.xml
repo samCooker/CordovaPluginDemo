@@ -3,7 +3,7 @@
           package="com.cookie.aestool"
 >
 
-    <application android:allowBackup="false"
+    <application android:allowBackup="true"
                  android:supportsRtl="true"
     >
 

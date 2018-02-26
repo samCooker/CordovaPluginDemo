@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="cn.com.chaochuang.goldgrid.filepreview">
+
+    <application
+            android:name=".common.CustomApplication"
+    >
+        <activity android:name="cn.com.chaochuang.goldgrid.filepreview.PreviewContent">
+        </activity>
+    </application>
+
+</manifest>

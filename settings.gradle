@@ -1,1 +1,1 @@
-include ':app', ':filepicker', ':barcodescanner', ':datepicker', ':aestool', ':pdfium'
+include ':app', ':filepicker', ':barcodescanner', ':datepicker', ':pdfium', ':tbspreview', ':appupdate', ':goldgridpreview'

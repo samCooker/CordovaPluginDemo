@@ -1,28 +1,30 @@
 package com.cookie.cordovaplugindemo;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import com.alipay.sdk.app.PayTask;
-import com.cookie.cordovaplugindemo.alipay.PayResult;
 import com.cookie.datepicker.CTimePickerDialog;
 import com.cookie.datepicker.CTimePickerDialogListener;
+import cn.com.chaochuang.goldgrid.filepreview.PreviewContent;
+import com.cookie.tbspreview.TbsPreviewActivity;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static cn.com.chaochuang.goldgrid.filepreview.utill.MyConstant.*;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int SDK_PAY_FLAG = 1;
     private static String TAG = "AliPay";
+
+    String copyRight = "SxD/phFsuhBWZSmMVtSjKZmm/c/3zSMrkV2Bbj5tznSkEVZmTwJv0wwMmH/+p6wLH8aAHP4uHwybWPqtGG+2+dEp+R9AIBVe8F5pIZkZmlw/tC12y3EYzketxYJge2y52ehDPE940OcknJulMPreZ8NSyZtjuAFny7U2Uw34YrbjbCd5PSCvGZD+1JNEwdcqpwECJMGX7f5ig3WelgJE1J7CHHwcDBnMVj8djMthFaapMFm/i6swvGEQ2JoygFU3aVajuYu/yrZMT/GcKh5Jm2J4C9pL9rTcXXb4rsAQi4ugSOimMBZXAWJyoNec+zKVPMvlGx3VCgB00ugs/giWbmbOGDsTXe358SjOA3eCpX9fjgZng3BAkQ0sSjCWwWV9Oa2MQzTCfDM1NDjQqGRF6KZJhr2fg9mMpqlUrMXb+X4JAdTVJzI55s8uemwOVAPMNmT3Gc6ktkK/7bviN76kdW9XmCmwlZlxKnkAgp1jgbY=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         Button alipayBtn = (Button) findViewById(R.id.btn_alipay);
         final Intent pickerFileIntent = new Intent(this, com.cookie.cordovaplugindemo.filepicker.MainActivity.class);
         final Intent barScannerIntent = new Intent(this, BarScanner.class);
-
+        final Intent tbsPreviewIntent = new Intent(this, TbsPreviewActivity.class);
+        tbsPreviewIntent.putExtra("filePath","file:///storage/emulated/0/swfda_mobile_downloaduf_15de86ce801_1.docx");
         filePickerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,70 +69,50 @@ public class MainActivity extends AppCompatActivity {
         alipayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i(TAG, " 构造PayTask 对象 ");
-                        PayTask alipay = new PayTask(MainActivity.this);
-                        Log.i(TAG, " 调用支付接口，获取支付结果 ");
-                        String result = alipay.pay("alipay_sdk=alipay-sdk-java-dynamicVersionNo&app_id=2017100309101629&biz_content=%7B%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22out_trade_no%22%3A%22%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22subject%22%3A%22App%E6%94%AF%E4%BB%98%E6%B5%8B%E8%AF%95Java%22%2C%22timeout_express%22%3A%2230m%22%2C%22total_amount%22%3A%220.01%22%7D&charset=utf-8&format=json&method=alipay.trade.app.pay&notify_url=%E5%95%86%E6%88%B7%E5%A4%96%E7%BD%91%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE%E7%9A%84%E5%BC%82%E6%AD%A5%E5%9C%B0%E5%9D%80&sign=hApzJfefGBenHxwj1ebFYuFFBrJy%2F8LLCQAM1Vimw18CQXc19Kd32DazQ86Wd14KW%2BO7aYgRPOkrRQcxWzzp7omkFX5N%2FMsWGNLAh6necHbl29ZYw4vhxFuN%2FymeMVQ4KgAH6KX6TWNQ8mDbODfzIHydun10RaXOagabd3FhWjukJFvjT0W0TTqPiC4NQDm%2BcCGwrdeFLu7yWN2zNFhICx3BOzDUfatf4yIKGDBoLxmp8QfbdBtLbNt1r2861%2FC3qwoqzB0ysAZFFsO7l747OU4csMZufjjiUmXYIAnpQg0NYrHKUYdl5j%2FdPXRn0xCKQgss60CdkvuncZff0STAHg%3D%3D&sign_type=RSA2&timestamp=2017-10-06+00%3A14%3A15&version=1.0", true);
-
-                        // 更新主ui的Toast
-                        Message msg = new Message();
-                        msg.what = SDK_PAY_FLAG;
-                        msg.obj = result;
-                        mHandler.sendMessage(msg);
-
-                        PayResult payResult = new PayResult(result);
-                        if (TextUtils.equals(payResult.getResultStatus(), "9000")) {
-                            Log.i(TAG, " 9000则代表支付成功，具体状态码代表含义可参考接口文档 ");
-                        } else {
-                            Log.i(TAG, " 为非9000则代表可能支付失败 ");
-                            if (TextUtils.equals(payResult.getResultStatus(),
-                                    "8000")) {
-                                Log.i(TAG,
-                                        " 8000代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态） ");
-                            } else {
-                                Log.i(TAG, " 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误 ");
-                            }
-                        }
-                    }
-                });
+                //内置sd卡路径
+//                String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+                String sdcardPath = "/storage/emulated/0/supercreate/meeting/admin/Spring Data JPA中文文档[1.4.3].pdf";
+                File file = new File(sdcardPath);
+                Uri uri = Uri.fromFile(file);
+                Intent intent = new Intent("android.intent.action.VIEW", uri);
+                //intent.setClass(context, BookShower.class);
+                intent.setClassName(MainActivity.this, PreviewContent.class.getName());
+                // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                // 传递PDF ID
+                intent.putExtra(KEY_PDFID, "30222");
+                // 传递PDF TRUENAME
+                intent.putExtra(KEY_PDFTRUENAME, "Spring Data JPA中文文档[1.4.3].pdf");
+                // 传递用户名，默认admin
+                intent.putExtra(NAME, "admin");
+                // 传递授权码(必传)
+                intent.putExtra(LIC, copyRight);
+                // 是否支持域编辑功能，在表单PDF文件中可体现此功能，默认为false
+                intent.putExtra(CANFIELDEIDT, true);// 可选值为布尔值
+                // 文档保存之后批注是否只读，默认为false,不需要修改请忽略此参
+                intent.putExtra(ANNOTPROTECTNAME, true);
+                intent.putExtra(T7MODENAME, false);
+                // 默认用矢量方式
+                intent.putExtra(VECTORNAME, true);
+                // 是否保留PDF上次阅读位置，默认为true,为false时每次都从第一页开始阅读
+                intent.putExtra(LOADCACHENAME, true);
+                // 是否填充模板(选用)
+                intent.putExtra(FILLTEMPLATE, true);
+                // 阅读模式，默认PageViewMode.VSCROLL，竖向连续翻页,不需要重设可忽略
+                intent.putExtra(VIEWMODENAME, VIEWMODE_SINGLEH);
+                intent.putExtra(USER_NAME_KEY, "admin");
+                intent.putExtra(REAL_NAME_KEY, "系统管理员");
+                intent.putExtra(MEETING_ID, "30047");
+                startActivity(intent);
             }
         });
     }
 
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SDK_PAY_FLAG: {
-                    PayResult payResult = new PayResult((String) msg.obj);
-                    /**
-                     * 同步返回的结果必须放置到服务端进行验证（验证的规则请看https://doc.open.alipay.com/doc2/
-                     * detail.htm?spm=0.0.0.0.xdvAU6&treeId=59&articleId=103665&
-                     * docType=1) 建议商户依赖异步通知
-                     */
-                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(RESULT_OK == resultCode){
 
-                    String resultStatus = payResult.getResultStatus();
-                    if (TextUtils.equals(resultStatus, "9000")) {
-                        Toast.makeText(MainActivity.this, "支付成功",
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-
-                        if (TextUtils.equals(resultStatus, "8000")) {
-                            Toast.makeText(MainActivity.this, "支付结果确认中",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, "支付失败",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    break;
-                }
-                default:
-                    break;
-            }
         }
-    };
+    }
+
 }

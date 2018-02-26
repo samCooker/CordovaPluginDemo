@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="navbar_bg_color">#0080c0</color>
+    <color name="colorPrimary">#0080c0</color>
+    <color name="colorPrimaryDark">#0178b3</color>
+    <color name="colorAccent">#0080c0</color>
+    <color name="common_main_bg_color">#ffefeff4</color>
+    <color name="app_spliterline_color">#ffdddddd</color>
+    <!--导航栏标题文字颜色-->
+    <color name="navbar_titletext_color">#ff000000</color>
+    <!--导航栏底部分割线颜色-->
+    <color name="navbar_bottom_spliterline_color">#ffdbdbdb</color>
+    <!--交互UI客户区的背景颜色-->
+    <color name="mainclientcontent_bg_color">#fff0f2f5</color>
+    <!--首页底部工具栏背景色-->
+    <color name="mainbottomtoolbar_bg_color">#ffe8e8e8</color>
+    <!--底部工具栏标题文字的字体颜色-->
+    <color name="mainbottomtoolbar_titletext_color_nor">#ffbbbbbb</color>
+    <color name="mainbottomtoolbar_titletext_color_sel">#ff549cd5</color>
+
+    <color name="navbar_title_text_color">#ff000000</color>
+    <color name="navbar_btn_title_text_color">#ff000000</color>
+    <color name="navbar_btn_bg_color">#ff1086d0</color>
+    <color name="navbar_bottom_line_color">#ffdbdbdb</color>
+
+    <!--自定义dialog-->
+    <color name="blue">#63aade</color>
+    <color name="white">#ffffff</color>
+
+    <color name="outline">#BB89009F</color>
+    <color name="customcolor">#ffffff</color>
+</resources>

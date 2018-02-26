@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:example="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/hw_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/kinggrid_bg_menu_sub"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black" />
+    </RelativeLayout>
+
+    <com.kinggrid.iapppdf.ui.viewer.PDFHandWriteView
+        android:id="@+id/v_canvas1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff" />
+
+    <RelativeLayout
+        android:id="@+id/layout_btns"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_pen"
+                android:layout_width="55.0dip"
+                android:layout_height="65.0dip"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:background="#11C1F3"
+                android:text="画 笔\n样 式"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_send"
+                android:layout_width="55.0dip"
+                android:layout_height="65.0dip"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:background="#33CD5F"
+                android:text="发 送\n批 注"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_undo"
+                android:layout_width="55.0dip"
+                android:layout_height="65.0dip"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="3dp"
+                android:background="#EF473A"
+                android:text="回 退\n批 注"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_redo"
+                android:layout_width="55.0dip"
+                android:layout_height="65.0dip"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="3dp"
+                android:background="#EF473A"
+                android:text="撤 销\n批 注"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="55.0dip"
+                android:layout_height="65.0dip"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="3dp"
+                android:background="#EF473A"
+                android:text="保 存\n批 注"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_clear"
+                android:layout_width="55.0dip"
+                android:layout_height="65.0dip"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp"
+                android:background="#EF473A"
+                android:text="清 除\n批 注"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_close"
+                android:layout_width="55.0dip"
+                android:layout_height="55.0dip"
+                android:layout_gravity="center_horizontal"
+                android:background="#EF473A"
+                android:text="关闭"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

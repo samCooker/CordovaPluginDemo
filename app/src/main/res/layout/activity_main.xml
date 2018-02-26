@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:rowCount="3"
-            android:columnCount="2"
                 >
 
     <Button
             android:id="@+id/btn_filepicker"
             android:background="#1E88E5"
             android:text="@string/file_picker_name"
-            android:layout_columnWeight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
     />
 
     <Button
             android:id="@+id/bar_scanner"
             android:background="#1E88E5"
             android:text="@string/bar_scanner"
-            android:layout_columnWeight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
     />
 
     <Button
             android:id="@+id/btn_datepicker"
             android:background="#1E88E5"
             android:text="@string/date_picker_name"
-            android:layout_columnWeight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
     />
 
     <Button
             android:id="@+id/btn_alipay"
             android:background="#1E88E5"
-            android:text="@string/date_picker_name"
-            android:layout_columnWeight="1"
+            android:text="filePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
     />
 
-</GridLayout>
+</LinearLayout>

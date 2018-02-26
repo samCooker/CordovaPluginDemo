@@ -1,0 +1,126 @@
+<resources>
+    <string name="app_name">FilePreview</string>
+
+    <string name="view_close">关闭</string>
+    <string name="msg_loading_tip">正在加载，请稍候！</string>
+
+    <string name="loading">正在加载中，请稍后...</string>
+    <string name="back_abnormal_results">数据返回异常</string>
+    <string name="download_success">下载成功</string>
+    <string name="file_does_not_exist">文件不存在</string>
+    <string name="index_fragment_navbar_title">当前会议</string>
+    <string name="mymeeting_fragment_navbar_title">我的会议</string>
+    <string name="notice_fragment_navbar_title">通知公告</string>
+    <string name="databank_fragment_navbar_title">资料库</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- 自定义刷新的布局 -->
+    <string name="header_reset">下拉刷新</string>
+    <string name="header_pull">下拉刷新</string>
+    <string name="header_pull_over">释放立即刷新</string>
+    <string name="header_refreshing">正在加载...</string>
+    <string name="header_completed">刷新成功</string>
+    <string name="header_completed_fail">刷新失败</string>
+    <!--             登录                             -->
+    <!--             会议详细meetingdetailactivity                            -->
+    <string name="meeting_title">会议信息</string>
+    <string name="meeting_context">会议内容</string>
+    <string name="meeting_accessory">会议附件</string>
+    <!--             通知详情                          -->
+    <string name="notice_context">正文内容</string>
+    <string name="notice_accessory">附件列表</string>
+
+    <!--pdf签批-->
+    <string name="action_settings">Settings</string>
+    <string name="signature">签名</string>
+    <string name="signature_delete">删除签名</string>
+    <string name="note_list">批注清单</string>
+    <string name="text_note_list">注释清单</string>
+    <string name="annot_sound_list">语音清单</string>
+    <string name="note_delete">删除注释</string>
+    <string name="full_signature_delete">删除批注</string>
+    <string name="document_save">保存文档</string>
+    <string name="sound_note">语音批注</string>
+    <string name="delete_sound_note">删除语音</string>
+    <string name="camera">证件拍照</string>
+    <string name="digital_signature">在线数字签名</string>
+    <string name="local_digital_signature">数字签名</string>
+    <string name="verify">验证</string>
+    <string name="search">搜索</string>
+    <string name="area">区域签批</string>
+    <string name="document_saveas">另存</string>
+    <string name="save_pages">保存页面图片</string>
+    <string name="save">保存</string>
+    <string name="save_field_content">保存文本域内容</string>
+    <string name="btnlocal">网络文档</string>
+    <string name="insertlable">URL</string>
+    <string name="user_name">用户名</string>
+    <string name="edt_user_name">admin</string>
+    <string name="pageview_mode">您希望以什么方式显示PDF文档？</string>
+    <string name="sign_mode">手写模式</string>
+    <string name="annot_protection">保存后是否保护批注</string>
+    <!-- notedialog -->
+    <string name="note_user_postil">批注领导</string>
+    <string name="note_user_text">注释领导</string>
+    <string name="note_content">内容</string>
+    <string name="note_time_postil">批注时间</string>
+    <string name="note_time_text">注释时间</string>
+    <string name="note_page_num">页码</string>
+    <!-- dialog -->
+    <string name="dialog_title">提示</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="dialog_message_annot_signature">即将删除文档中当前用户的全部手写签名，是否删除？</string>
+    <string name="dialog_message_annot_hardwrite">即将删除文档中当前用户的全部手写批注，是否删除？</string>
+    <string name="dialog_message_annot_text">即将删除文档中当前用户的全部文字注释，是否删除？</string>
+    <string name="dialog_message_annot_sound">即将删除文档中当前用户的全部语音批注，是否删除？</string>
+    <string name="dialog_message_save">是否保存文档？</string>
+    <!-- result -->
+    <string name="result_invalid_sign">至少有一个签名是无效的</string>
+    <string name="result_valid_sign">所有签名有效</string>
+    <string name="result_no_exist_sign">文档不存在数字签名</string>
+    <string name="result_add_content">所有签名有效，最后一次签名后追加了内容</string>
+    <string name="result_sign_unusual">数字签名异常</string>
+    <string name="result_success_sign">签名成功</string>
+    <string name="exception_tip">网络连接发生异常</string>
+    <string name="dialog_save_info">PDF文档已修改，是否保存？</string>
+    <string name="tip">提示</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_sure">确定</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_no_save">不保存</string>
+    <string name="outline_missed">大纲不可用</string>
+    <string name="noData">没有数据</string>
+    <string name="author">批注领导:</string>
+    <string name="useRecordDevice">录音设备正在使用中</string>
+    <string name="username_different_del">你无权删除其他用户添加的批注信息!</string>
+    <string name="choiseCertificate">选择证书</string>
+    <string name="enterUsernameAndPassword">输入用户名和密码</string>
+    <string name="getCertificateList">获取证书列表中</string>
+    <string name="getCertificateNameFailed">获取证书名失败</string>
+    <string name="getCertificateInfo">获取证书信息中</string>
+    <string name="getCertificateInfoFailed">获取证书信息失败</string>
+    <string name="noCertificate">没有证书</string>
+    <string name="doNotfindBluetoothDevice">没有找到相关蓝牙设备!</string>
+    <string name="connectDeviceFailed">连接设备失败！</string>
+    <string name="loginFailed">登陆失败！</string>
+    <string name="no_signature2">该文档没有签名域，无法做签名操作</string>
+    <string name="close_doc_title">是否关闭当前文档？</string>
+
+    <!--自定义的文字-->
+    <!--全文批注-->
+    <string name="full_signature">手写批注</string>
+    <string name="text_note">文字批注</string>
+    <string name="hide_postil">隐藏批注</string>
+    <string name="show_postil">显示批注</string>
+    <string name="delete_postil">删除批注</string>
+    <string name="start_synchronization">发起同步</string>
+    <string name="synchronization_read">同步阅读</string>
+    <string name="follow_read">跟读</string>
+    <string name="bookmark_list">大纲</string>
+    <string name="select_file">切换文件</string>
+    <string name="read_voice">语音阅读</string>
+    <string name="outline_title">大纲</string>
+</resources>

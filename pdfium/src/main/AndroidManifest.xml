@@ -3,7 +3,7 @@
           package="com.cookie.pdfium"
 >
 
-    <application android:allowBackup="false"
+    <application
                  android:supportsRtl="true"
     >
 

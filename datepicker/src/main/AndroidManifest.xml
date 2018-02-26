@@ -3,7 +3,7 @@
           package="com.cookie.datepicker">
 
     <application
-            android:allowBackup="false"
+
             android:supportsRtl="true">
     </application>
 

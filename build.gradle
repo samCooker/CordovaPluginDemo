@@ -3,9 +3,11 @@
 buildscript {
     repositories {
         jcenter()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -15,9 +17,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        google()
     }
 }
 
@@ -39,3 +40,4 @@ ext {
     // Library dependencies
     supportLibraryVersion = '25.4.0'
 }
+
