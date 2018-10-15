@@ -49,8 +49,8 @@ public interface MyConstant {
     final static String SPD_FONT_SIZE_KEY = "spd_font_size";//设置字体大小样式保存缓存
     // final static String INIT_APP_URL = "http://192.168.1.104:8080/ad5/";
 
-    final static String INIT_APP_URL = "192.168.20.8:38080";
-    final static String INIT_PDF_DOWLOAD_URL = "192.168.20.8:38080";
+    final static String INIT_APP_URL = "192.168.10.109:38080";
+    final static String INIT_PDF_DOWLOAD_URL = "192.168.10.109:38080";
     final static String APP_USERNAME_COPEY_KEY = "username_copey";//用户缓存
     final static String APP_URL_KEY = "app_url";// 保存URL KEY
     final static String PDF_DOWLOAD_URL_KEY = "pdf_dowload_url";// 保存URL KEY

@@ -20,9 +20,9 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             fab:fab_addButtonSize="mini"
             fab:fab_expandDirection="up"
     >
@@ -43,6 +43,16 @@
                 android:layout_height="wrap_content"
                 fab:fab_size="mini"
                 fab:fab_icon="@drawable/ic_message"
+                fab:fab_colorNormal="@color/btn_white"
+                fab:fab_colorPressed="@color/btn_press_white"
+        />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/ac_annot_visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_size="mini"
+                fab:fab_icon="@drawable/ic_txt_show"
                 fab:fab_colorNormal="@color/btn_white"
                 fab:fab_colorPressed="@color/btn_press_white"
         />

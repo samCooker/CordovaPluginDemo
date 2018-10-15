@@ -10,14 +10,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.webkit.WebView;
 import android.widget.*;
-import cn.com.chaochuang.goldgrid.filepreview.utill.AnnotationToJsonUtil;
-import cn.com.chaochuang.goldgrid.filepreview.utill.HttpServer;
-import cn.com.chaochuang.goldgrid.filepreview.utill.MyConstant;
+import cn.com.chaochuang.goldgrid.filepreview.utill.*;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.kinggrid.iapppdf.emdev.ui.gl.GLConfiguration;
@@ -36,19 +34,24 @@ import java.util.ArrayList;
 
 public class PreviewContent extends IAppPDFActivity implements MyConstant {
 
-    private Button backButton;
     private FloatingActionsMenu actionsMenu;
-    private FloatingActionsMenu handleWriteMenu;
     private FloatingActionButton handWrite;
     private FloatingActionButton textInput;
-    private FloatingActionButton btnSaveNote;
+    //批注显示按钮
+    private FloatingActionButton annotVisible;
+    //是否显示批注
+    private boolean annotIsVisible = true;
 
     /**
      * 全文批注按钮
      */
-    public FloatingActionButton btnClose, btnClear, btnUndo, btnRedo, btnSave, btnPen, btnEarse, btnSend;
+    public FloatingActionButton btnClose, btnClear, btnUndo, btnRedo, btnSave, btnEarse;
+    private boolean btnSelected = false;
 
     private FrameLayout frameLayout;
+
+    private AnnotUtil annotUtil;
+
     private boolean hasLoaded = false;
     //文件的路径
     public String path = "";
@@ -89,8 +92,8 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
         super.initPDFView(frameLayout);
         this.initToolBar();
         this.initParentListener();
-        super.setLoadingText(R.string.msg_loading_tip);
 
+        annotUtil = new AnnotUtil(this, userName);
 
         IntentFilter filter = new IntentFilter("com.kinggrid.pages.bmp.save");
         registerReceiver(receiver, filter);
@@ -130,6 +133,7 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             if (action.equals(BroadCastActions.BC_DelAnnotSuccess)) {
                 //删除批注成功
                 refreshDocument();
+                Toast.makeText(context,"删除批注成功",Toast.LENGTH_SHORT).show();
             } else if (action.equals(BroadCastActions.BC_DelAnnotFailure)) {
                 //删除批注失败
             } else if (action.equals(BroadCastActions.BC_GetAllAnnotSuccess)) {
@@ -141,26 +145,33 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             } else if (action.equals(BroadCastActions.BC_GetAllAnnotFailure)) {
                 //获取批注失败
                 LogUtil.d("pz", "获取批注失败");
+                Toast.makeText(context,"获取批注失败",Toast.LENGTH_SHORT).show();
             } else if (action.equals(BroadCastActions.BC_AddAnnotSuccess)) {
                 //添加批注成功
                 Log.d("pz", "添加批注成功");
+                Toast.makeText(context,"添加批注成功",Toast.LENGTH_SHORT).show();
             } else if (action.equals(BroadCastActions.BC_AddAnnotFailure)) {
                 //添加批注失败
                 Log.d("pz", "添加批注失败");
+                Toast.makeText(context,"添加批注失败",Toast.LENGTH_SHORT).show();
             } else if (action.equals(BroadCastActions.BC_UpdateTextAnnotContentSuccess)) {
                 //更新文字批注成功
                 refreshDocument();
                 Log.d("pz", "更新文字批注成功");
+                Toast.makeText(context,"更新文字批注成功",Toast.LENGTH_SHORT).show();
             } else if (action.equals(BroadCastActions.BC_UpdateTextAnnotContentFailure)) {
                 //更新文字批注失败
                 Log.d("pz", "更新文字批注失败");
+                Toast.makeText(context,"更新文字批注失败",Toast.LENGTH_SHORT).show();
             } else if (action.equals(BroadCastActions.BC_SendAnnotSuccess)) {
                 //发送批注成功
-                Log.d("pz", "发送批注成功");
                 refreshDocument();
+                Log.d("pz", "发送批注成功");
+                Toast.makeText(context,"发送批注成功",Toast.LENGTH_SHORT).show();
             } else if (action.equals(BroadCastActions.BC_SendAnnotFailure)) {
                 //发送批注失败
                 String error = intent.getStringExtra("error");
+                Toast.makeText(context,"发送批注失败",Toast.LENGTH_SHORT).show();
                 Log.d("pz", "发送批注失败");
                 Log.d("pz", "错误：" + error);
             }
@@ -220,17 +231,6 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
 
     }
 
-    private void backButtonEvent() {
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //todo 释放一些资源？
-                PreviewContent.this.finish();
-                finish();
-            }
-        });
-    }
-
     private void initParentListener() {
         getController().setLoadPageFinishedListener(
             new ViewerActivityController.LoadPageFinishedListener() {
@@ -240,6 +240,7 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
                     if (!hasLoaded) {
                         HttpServer httpServer = new HttpServer();
                         if(userName!=null&&pdfId!=null) {
+                            Toast.makeText(context,"正在获取批注",Toast.LENGTH_SHORT).show();
                             httpServer.insertAnnotationThread(userName, pdfId);
                         }
                         hasLoaded = true;
@@ -248,6 +249,36 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
                 }
             }
         );
+
+        //添加批注
+        super.setOnViewTouchAddAnnotListener(new OnViewTouchAddAnnotListener() {
+
+            @Override
+            public void onTouch(float x, float y) {
+                if (isAnnotation) {
+                    isAnnotation = false;
+                    //文字批注
+                    Log.v("tbz", "textannot x = " + x + ", y = " + y);
+                    annotUtil.addTextAnnot(x, y);
+                    Toast.makeText(context,"文字批注",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+        //显示批注
+        super.setOnViewTouchShowAnnotListener(new OnViewTouchShowAnnotListener() {
+
+            @Override
+            public void onTouchTextAnnot(Annotation annotation) {
+                annotUtil.showTextAnnot(annotation);
+            }
+
+            @Override
+            public void onTouchSoundAnnot(Annotation annotation) {
+                // TODO: 2018-2-27 语言批注
+            }
+
+        });
 
         //同步接口
         super.setOnSynchronizationOptionListener(new OnSynchronizationOptionListener() {
@@ -463,47 +494,98 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             Log.v("IAppPDFActivity", "initPDFView method found error");
         }
 
-//        if(!this.D) {
-//            this.b();
-//            this.e();
-//        }
     }
 
     private void initToolBar() {
         handWrite = findViewById(R.id.ac_hand_write);
         textInput = findViewById(R.id.ac_txt_input);
+        annotVisible = findViewById(R.id.ac_annot_visible);
         actionsMenu = findViewById(R.id.action_menu);
-
-        //手写页面
-        handwriteView_layout = View.inflate(context,
-                R.layout.signature_kinggrid_full, null);
-        full_handWriteView = handwriteView_layout
-                .findViewById(R.id.v_canvas1);
-        handleWriteMenu = handwriteView_layout.findViewById(R.id.hand_write_menu);
-        isSendPageFn = false;
-        this.initBtnView(handwriteView_layout);
 
 
         handWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actionsMenu.collapse();
+                btnSelected = !handWrite.isSelected();
+                actionsMenu.dispatchSetSelected(false);
+                handWrite.setSelected(btnSelected);
+                //当全文签批时，若页面还在滚动，则自动停止
+                if (!getController().getView().isScrollFinished()) {
+                    getController().getView().forceFinishScroll();
+                }
+                try {
+                    handwriteView_layout = View.inflate(context, R.layout.signature_kinggrid_full, null);
+                    full_handWriteView = (PDFHandWriteView) handwriteView_layout.findViewById(R.id.v_canvas1);
+                } catch (Exception e) {
+                    Toast.makeText(context,"手写批注失败",Toast.LENGTH_LONG).show();
+                    Log.i("Exceptionlayout", e.toString());
+                }
 
-                Message msg = new Message();
-                msg.what = 100;
-                myHandler2.sendMessage(msg);
+                if (full_handWriteView == null) return;
 
-                handleWriteMenu.expand();
+                isSendPageFn = false;
+                initBtnView(handwriteView_layout);
+                showHandWriteBtns();
+                openHandwriteAnnotation(handwriteView_layout, full_handWriteView);
+
             }
         });
 
-//        handleWriteBtn = findViewById(R.id.btn_handle_write);
-//        handleWriteBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                sxpzFromJs("admin");
-//            }
-//        });
+        textInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTextAnnotation();
+            }
+        });
+
+        annotVisible.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                annotIsVisible = !annotIsVisible;
+                String annotTip = annotVisible.getTitle();
+                if(annotTip==null||"".equals(annotTip)){
+                    annotVisible.setTitle("请稍等");
+                    setAllAnnotationsVisible(annotIsVisible);
+                    refreshDocument2Handler.sendMessage(new Message());
+                }
+            }
+        });
+    }
+
+    @SuppressLint("HandlerLeak")
+    Handler refreshDocument2Handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            refreshDocument();
+            annotVisible.setTitle("");
+            if(annotIsVisible){
+                annotVisible.setIcon(R.drawable.ic_txt_show);
+            }else{
+                annotVisible.setIcon(R.drawable.ic_txt_hidden);
+            }
+        }
+    };
+
+    private void showHandWriteBtns() {
+        actionsMenu.removeButton(handWrite);
+        actionsMenu.removeButton(textInput);
+        actionsMenu.removeButton(annotVisible);
+
+        actionsMenu.addButton(btnClose);
+        actionsMenu.addButton(btnSave);
+        actionsMenu.addButton(btnUndo);
+        actionsMenu.addButton(btnRedo);
+    }
+
+    private void showActionBtns() {
+        actionsMenu.removeButton(btnClose);
+        actionsMenu.removeButton(btnSave);
+        actionsMenu.removeButton(btnUndo);
+        actionsMenu.removeButton(btnRedo);
+
+        actionsMenu.addButton(handWrite);
+        actionsMenu.addButton(textInput);
+        actionsMenu.addButton(annotVisible);
     }
 
 
@@ -514,33 +596,33 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
     // 是否进行分页;(true 表示分页，false表示不分页)
     public boolean isSendPageFn = true;
 
-    @SuppressLint("HandlerLeak")
-    Handler myHandler2 = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            openHandwriteAnnotation(handwriteView_layout, full_handWriteView);
-        }
-    };
-
-
-
     // 判断是否是保存或者发送(发送 0,保存1)
     public int isSaveOrSend = 0;
     /*
     * 初始化全文批注界面中的按钮，并设置按钮点击事件的监听接口
     */
     private void initBtnView(final View layout) {
-        btnClose = layout.findViewById(R.id.btn_close);
+        btnClose = new FloatingActionButton(context);
+        btnClose.setSize(FloatingActionButton.SIZE_MINI);
+        btnClose.setIcon(R.drawable.ic_close);
+        btnClose.setColorNormalResId(R.color.btn_white);
+        btnClose.setColorPressedResId(R.color.btn_press_white);
         //关闭
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isSendPageFn = true;
                 closeWirte(layout);
+
+                showActionBtns();
             }
         });
         //保存
-        btnSave = layout.findViewById(R.id.btn_save);
+        btnSave = new FloatingActionButton(context);
+        btnSave.setSize(FloatingActionButton.SIZE_MINI);
+        btnSave.setIcon(R.drawable.ic_save);
+        btnSave.setColorNormalResId(R.color.btn_white);
+        btnSave.setColorPressedResId(R.color.btn_press_white);
         btnSave.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -575,7 +657,11 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             }
         });
 
-        btnUndo = layout.findViewById(R.id.btn_undo);
+        btnUndo = new FloatingActionButton(context);
+        btnUndo.setSize(FloatingActionButton.SIZE_MINI);
+        btnUndo.setIcon(R.drawable.ic_undo);
+        btnUndo.setColorNormalResId(R.color.btn_white);
+        btnUndo.setColorPressedResId(R.color.btn_press_white);
         btnUndo.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -584,7 +670,11 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             }
         });
 
-        btnRedo = layout.findViewById(R.id.btn_redo);
+        btnRedo = new FloatingActionButton(context);
+        btnRedo.setSize(FloatingActionButton.SIZE_MINI);
+        btnRedo.setIcon(R.drawable.ic_redo);
+        btnRedo.setColorNormalResId(R.color.btn_white);
+        btnRedo.setColorPressedResId(R.color.btn_press_white);
         btnRedo.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -593,7 +683,11 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             }
         });
 
-        btnClear =  layout.findViewById(R.id.btn_clear);
+        btnClear = new FloatingActionButton(context);
+        btnClear.setSize(FloatingActionButton.SIZE_MINI);
+        btnClear.setIcon(R.drawable.ic_clearup);
+        btnClear.setColorNormalResId(R.color.btn_white);
+        btnClear.setColorPressedResId(R.color.btn_press_white);
         btnClear.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -602,19 +696,6 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
             }
         });
 
-        btnPen = layout.findViewById(R.id.btn_pen);
-        btnPen.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                full_handWriteView.setPenSettingInfoName("demo_type", "demo_size", "demo_color");
-                full_handWriteView.doSettingHandwriteInfo();
-            }
-        });
-        //发送
-//        btnSend = layout.findViewById(R.id.btn_send);
-
-        //按钮添加到工具栏
     }
 
     // 关闭手写签批
@@ -661,6 +742,7 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
                     View rm_view = (View) msg.obj;
                     hiddenViewFromPDF(rm_view);
                     hiddenViewFromPDF(handwriteView_layout);
+                    showActionBtns();
                     break;
                 case MSG_WHAT_LOADANNOTCOMPLETE:
                     //获取批注之后，更新批注清单
@@ -681,4 +763,21 @@ public class PreviewContent extends IAppPDFActivity implements MyConstant {
         }
     };
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)) {
+            saveAndExit();
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 保存并退出金格控件
+     */
+    private void saveAndExit() {
+        closeDocument();
+        finish();
+        android.os.Process.killProcess(android.os.Process.myPid());//必需要杀掉进程
+    }
 }

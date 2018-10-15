@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class HttpServer {
 
-    public static String APP_BASE_URL = "http://192.168.20.8:38080";
+    public static String APP_BASE_URL = "http://192.168.10.109:38080";
 
     public static String RELATE_URL = "/hysj/padi/";
 

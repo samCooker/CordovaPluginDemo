@@ -3,12 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CordovaPluginDemo.iml" filepath="$PROJECT_DIR$/CordovaPluginDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aestool/aestool.iml" filepath="$PROJECT_DIR$/aestool/aestool.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/barcodescanner/barcodescanner.iml" filepath="$PROJECT_DIR$/barcodescanner/barcodescanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dataAec/dataAec.iml" filepath="$PROJECT_DIR$/dataAec/dataAec.iml" />
       <module fileurl="file://$PROJECT_DIR$/datepicker/datepicker.iml" filepath="$PROJECT_DIR$/datepicker/datepicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/filepicker/filepicker.iml" filepath="$PROJECT_DIR$/filepicker/filepicker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/pdfium/pdfium.iml" filepath="$PROJECT_DIR$/pdfium/pdfium.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imagepicker/imagepicker.iml" filepath="$PROJECT_DIR$/imagepicker/imagepicker.iml" />
     </modules>
   </component>
 </project>
