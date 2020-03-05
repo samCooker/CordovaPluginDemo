@@ -12,16 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:src="@mipmap/ic_directory_parent"
+        android:background="@color/fp_colorHeader"
         android:scaleType="centerInside"
         android:id="@+id/imageView" />
 
     <LinearLayout
+        android:background="@color/fp_colorHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_vertical">
 
         <RelativeLayout
+            android:background="@color/fp_colorHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -33,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                style="?android:attr/textViewStyle"
+                android:background="@color/fp_colorHeader"
                 android:textColor="@color/fp_textColorPrimary"/>
 
             <TextView
@@ -45,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                style="?android:attr/textViewStyle"
+                android:background="@color/fp_colorHeader"
                 android:textColor="@color/fp_textColorPrimary"/>
 
         </RelativeLayout>
@@ -56,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            style="?android:attr/textViewStyle"
+            android:background="@color/fp_colorHeader"
             android:textColor="@color/fp_textColorSecondary"/>
     </LinearLayout>
 </LinearLayout>

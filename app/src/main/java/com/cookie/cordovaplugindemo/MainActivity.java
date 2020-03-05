@@ -3,14 +3,14 @@ package com.cookie.cordovaplugindemo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import com.cookie.filepicker.model.DialogConfigs;
+import com.cookie.filepicker.model.DialogProperties;
+import com.cookie.filepicker.view.FilePickerDialog;
 import com.cookie.imagepicker.GlideImageLoader;
-import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.ui.ImageGridActivity;
-import com.lzy.imagepicker.view.CropImageView;
 
 import java.util.ArrayList;
 
@@ -29,26 +29,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button filePickerBtn = (Button) findViewById(R.id.btn_filepicker);
 
-        ImagePicker imagePicker = ImagePicker.getInstance();
-        imagePicker.setImageLoader(new GlideImageLoader());   //设置图片加载器
-        imagePicker.setShowCamera(true);  //显示拍照按钮
-        imagePicker.setCrop(true);        //允许裁剪（单选才有效）
-        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
-        imagePicker.setSelectLimit(9);    //选中数量限制
-        imagePicker.setMultiMode(false);
-        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
-        imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
-        imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
-        imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
 
-        filePickerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ImageGridActivity.class);
-                startActivityForResult(intent, IMAGE_PICKER);
-            }
-        });
+//        ImagePicker imagePicker = ImagePicker.getInstance();
+//        imagePicker.setImageLoader(new GlideImageLoader());   //设置图片加载器
+//        imagePicker.setShowCamera(true);  //显示拍照按钮
+//        imagePicker.setCrop(true);        //允许裁剪（单选才有效）
+//        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+//        imagePicker.setSelectLimit(9);    //选中数量限制
+//        imagePicker.setMultiMode(false);
+//        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+//        imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+//        imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+//        imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
+//        imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
+//
+//        filePickerBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Intent intent = new Intent(MainActivity.this, ImageGridActivity.class);
+////                startActivityForResult(intent, IMAGE_PICKER);
+//                DialogProperties properties=new DialogProperties();
+//                //多选
+//                properties.selection_mode = DialogConfigs.MULTI_MODE;
+//                //只能选文件
+//                properties.selection_type=DialogConfigs.FILE_SELECT;
+//
+//                FilePickerDialog dialog = new FilePickerDialog(MainActivity.this,properties);
+//                dialog.show();
+//            }
+//        });
 
 
 //        Button barScannerBtn = (Button) findViewById(R.id.bar_scanner);
@@ -132,18 +141,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-            if (data != null && requestCode == IMAGE_PICKER) {
-                ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                if(images!=null){
-                    for(ImageItem imageItem:images){
-                        System.out.println("path"+imageItem.path);
-                    }
-                }
-            } else {
-                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
 }

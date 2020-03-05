@@ -34,7 +34,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/fname"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:textColor="@color/fp_colorBlack"
             style="?android:attr/textAppearanceLarge"/>
 
         <TextView
@@ -42,6 +43,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/ftype"
             android:textSize="12sp"
+            android:textColor="@color/fp_colorBlack"
             style="?android:attr/textViewStyle"/>
     </LinearLayout>
 
@@ -51,5 +53,6 @@
         android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/activity_margin"
         android:id="@+id/file_mark"
-        style="?android:attr/checkboxStyle" />
+        style="@style/filePickerCheckbox"
+         />
 </LinearLayout>

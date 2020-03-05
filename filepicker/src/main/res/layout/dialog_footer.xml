@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:layout_alignParentBottom="true"
-    style="?android:attr/background"
+    android:background="@color/fp_textColorPrimary"
     android:id="@+id/linearLayout">
 
     <Button
